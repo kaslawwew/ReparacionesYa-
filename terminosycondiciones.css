@@ -1,0 +1,251 @@
+/* Fuentes */
+@font-face {
+  font-family: 'Caldstone';
+  src: url('../FUENTES/Caldstone-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VCR_OSD_Mono';
+  src: url('../FUENTES/VCR_OSD_MONO_1.001.ttf') format('truetype');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'MarleyAntique';
+  src: url('../FUENTES/MarleyAntique.ttf') format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'HeadingNowTrial';
+  src: url('../FUENTES/HeadingNowTrial-66Bold.ttf') format('truetype');
+  font-weight: 500;
+}
+/* =========================
+   VARIABLES (DISEÑO GLOBAL)
+========================= */
+:root {
+    --bg: #0b1220;
+    --card: #111a2e;
+    --primary: #00b4d8;
+    --primary-dark: #00288c;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --white: #ffffff;
+
+    --radius: 14px;
+    --shadow: 0 12px 30px rgba(0,0,0,0.25);
+
+}
+
+/* =========================
+   RESET & BASE
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* =========================
+   HEADER
+========================= */
+header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.logo_imagen{
+    display: block;
+    width: clamp(250px, 35%, 450px);
+    height: clamp(250px, 35%, 450px);
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+.fondo_imagen{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+.header {
+    width:100%;
+    padding: 15px 20px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.93);
+    gap: 20px;
+    position: fixed;
+}
+
+.navegacion{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+/* Contenedor por arriba de la imagen */
+.contenido_arriba-imagen{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 20px;
+    gap: 15px;
+}
+.contenido_arriba-imagen .servicio_tecnico, .eslogan{
+    padding-left:20px;
+    position: relative;
+    top: 0;
+    color:#fff;
+    background-color: #00000049;
+    border-radius: 5px;
+    text-shadow: 1px .8px .8px rgb(0, 0, 0);
+    z-index: 2;
+}
+.servicio_tecnico{
+    font-size: 30px;
+    font-weight: 800;
+}
+.eslogan{
+    font-size:  20px;
+    opacity: 0.9;
+}
+#seccion_terminos{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg) 0%, var(--card) 100%);
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+}
+#seccion_terminos::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 180, 216, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+#seccion_terminos h2{
+    font-family: "Caldstone";
+    color: var(--primary);
+    font-size: 50px;
+    margin-bottom: 30px;;
+    text-transform: uppercase;
+}
+.TerminosyCondiciones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.subtitulo{
+    font-size: 26px;
+    font-family: "Caldstone";
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0;
+    margin: 20px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.parrafo{
+    font-size: 22px;
+    font-family: "HeadingNowTrial";
+    color: var(--text);
+    letter-spacing: 1.5px;
+    margin: 10px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    text-align: justify;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    width: 100%;
+    min-height: 35vh;
+    background: linear-gradient(180deg,#0055ff, #0055ff97) ;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 25px 15px;
+}
+
+footer h3 {
+    font-family:"MarleyAntique";
+    letter-spacing: 1.2px;
+    font-size: 24px;
+    font-weight: 600;
+    text-shadow: 2px 2px 2px #666;
+}
+
+/* Layout footer */
+.contenido_general {
+    display: grid;
+    grid-template-columns: 300px repeat(2, 1fr) 350px;
+    gap: 20px;
+    text-align: center;
+    font-family: "VCR_OSD_Mono";
+}
+.fondo-logo_footer{
+    width:280px;
+    height: 250px;
+}
+/* Redes */
+.redes_sociales .imagenes {
+    height: 32px;
+    margin: 8px;
+    transition: transform .2s ease;
+}
+
+.redes_sociales .imagenes:hover {
+    transform: scale(1.1);
+}
+/* Políticas */
+.politicas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contenido_general:nth-child(5) {
+    grid-column: 4;
+    place-self: center;
+}
+.politicas_navegacion {
+    color: #fff;
+    font-family: "VCR_OSD_Mono";
+    padding:8px;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 9px 0px;
+}
+.politicas_navegacion:hover{
+    text-decoration:solid;
+    scale: 1.1;
+}
+/* Copyright */
+.copyright {
+    font-size: 12px;
+    opacity: .8;
+    text-align: center;
+    font-family: "MarleyAntique";
+    letter-spacing: 0.5px;
+}

@@ -16,6 +16,12 @@
   src: url('../FUENTES/MarleyAntique.ttf') format('truetype');
   font-weight: 500;
 }
+
+@font-face {
+  font-family: 'HeadingNowTrial';
+  src: url('../FUENTES/HeadingNowTrial.ttf') format('truetype');
+  font-weight: 500;
+}
 /* =========================
    VARIABLES (DISEÑO GLOBAL)
 ========================= */
@@ -202,7 +208,7 @@ main {
 
 .subtitulo_quienes_somos {
     font-size: 48px;
-    font-family: "GrimeSlime";
+    font-family: "VCR_OSD_Mono";
     text-transform: uppercase;
     color: var(--primary);
     margin: 0;
@@ -408,7 +414,7 @@ main {
 
 .subtitulo_servicios {
     font-size: 48px;
-    font-family: "GrimeSlime";
+    font-family: "VCR_OSD_Mono";
     text-transform: uppercase;
     color: var(--primary);
     margin: 0 0 15px 0;
@@ -672,7 +678,7 @@ main {
 
 .promos_subtitulo {
     font-size: 48px;
-    font-family: "GrimeSlime";
+    font-family: "VCR_OSD_Mono";
     text-transform: uppercase;
     color: var(--primary);
     margin: 0 0 15px 0;
@@ -719,7 +725,7 @@ main {
     color: white;
     padding: 8px 15px;
     border-radius: 50px;
-    font-family: "GrimeSlime";
+    font-family: "VCR_OSD_Mono";
     font-size: 18px;
     font-weight: bold;
     z-index: 3;
@@ -750,8 +756,9 @@ main {
 }
 
 .promo_titulo_card {
-    font-family: "GrimeSlime";
+    font-family: "VCR_OSD_Mono";
     font-size: 20px;
+    font-weight: bold;
     color: var(--primary);
     margin: 0;
     text-transform: uppercase;
@@ -1034,7 +1041,6 @@ footer h3 {
 .contenido_general {
     display: grid;
     grid-template-columns: 300px repeat(2, 1fr) 350px;
-    grid-template-rows: auto auto;
     gap: 20px;
     text-align: center;
     font-family: "VCR_OSD_Mono";
@@ -1053,21 +1059,16 @@ footer h3 {
 .redes_sociales .imagenes:hover {
     transform: scale(1.1);
 }
-
-/* Bloque inferior */
-div:nth-child(5) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 10px;
-    margin-bottom: 6px;
-}
 /* Políticas */
 .politicas {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-
+.contenido_general:nth-child(5) {
+    grid-column: 4;
+    place-self: center;
+}
 .politicas_navegacion {
     color: #fff;
     font-family: "VCR_OSD_Mono";
@@ -1082,33 +1083,462 @@ div:nth-child(5) {
 }
 /* Copyright */
 .copyright {
-    font-size: 12px;
+    font-size: 18px;
     opacity: .8;
     text-align: center;
-    font-family: "MarleyAntique";
+    font-family: "VCR_OSD_Mono";
     letter-spacing: 0.5px;
 }
 
+/* =========================
+   MEDIA QUERIES - RESPONSIVE
+========================= */
 
-/* Medias Querys: */
-@media screen and (min-width: 768px) {
-   fondo_imagen{
-    width: 768px;
-    height: 500px;
-   }
-}
-
+/* Tablets y dispositivos medianos */
 @media screen and (max-width: 768px) {
-    .imagenes_formulario {
-        flex-direction: column;
-        gap: 20px;
+    /* HEADER */
+    header {
+        height: 80vh;
     }
     
-    .formulario_imagen {
+    .logo_imagen {
+        width: clamp(200px, 25%, 250px);
+        height: clamp(200px, 25%, 250px);
+    }
+    
+    .header {
+        padding: 12px 15px;
+        background-color: rgba(0, 0, 0, 0.95);
+    }
+    
+    .navegacion {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .navegacion a {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+    
+    .boton_header {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    /* SECCIONES */
+    .quienes_somos-section,
+    .servicios_section,
+    .promos_section,
+    .formulario_fondo_section {
+        padding: 40px 15px;
+        min-height: auto;
+    }
+    
+    .subtitulo_quienes_somos,
+    .subtitulo_servicios,
+    .promos_subtitulo {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+    
+    .servicios-descripcion,
+    .promos_descripcion {
+        font-size: 14px;
+    }
+    
+    .quienes_somos-grid,
+    .servicios-grid,
+    .promos_grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .quienes_somos-valores {
+        grid-template-columns: 1fr;
+    }
+    
+    .parrafo-principal,
+    .parrafo-secundario {
+        font-size: 14px;
+        padding: 15px;
+    }
+    
+    .servicio-card,
+    .promo_card {
+        padding: 20px 15px;
+    }
+    
+    .servicio-icono {
+        font-size: 42px;
+    }
+    
+    .servicio-titulo,
+    .promo_titulo_card {
+        font-size: 16px;
+    }
+    
+    .servicio-texto,
+    .promo_descripcion_card {
+        font-size: 12px;
+    }
+    
+    .precio_nuevo {
+        font-size: 20px;
+    }
+    
+    .formulario_fondo_container {
+        padding: 30px 20px;
+        max-width: 100%;
+    }
+    
+    .formulario_fondo_container h2 {
+        font-size: 24px;
+    }
+    
+    /* FOOTER */
+    footer {
+        padding: 20px 15px;
+        min-height: auto;
+    }
+    
+    footer h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .contenido_general {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .fondo-logo_footer {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        margin: 0 auto;
+    }
+    
+    .politicas {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .politicas_navegacion {
+        font-size: 11px;
+        padding: 5px;
+    }
+}
+
+/* Celulares pequeños */
+@media screen and (max-width: 480px) {
+    /* HEADER */
+    header {
+        height: 70vh;
+    }
+    
+    .logo_imagen {
+        width: clamp(180px, 20%, 200px);
+        height: clamp(120px, 20%, 200px);
+    }
+    
+    .header {
+        padding: 10px 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+    }
+    
+    .navegacion {
+        gap: 8px;
+        flex-direction: column;
+        justify-content: flex-start;
         width: 100%;
     }
     
-    .formulario_con_imagenes {
-        padding: 20px;
+    .navegacion a {
+        padding: 8px 10px;
+        font-size: 12px;
+        width: 100%;
+        text-align: center;
+        border-radius: 3px;
+        white-space: nowrap;
+    }
+    
+    .boton_header {
+        padding: 8px 10px;
+        font-size: 11px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* SECCIONES PRINCIPALES */
+    .quienes_somos-section,
+    .servicios_section,
+    .promos_section,
+    .formulario_fondo_section {
+        padding: 30px 12px;
+        min-height: auto;
+    }
+    
+    .subtitulo_quienes_somos,
+    .subtitulo_servicios,
+    .promos_subtitulo {
+        font-size: 24px;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+    
+    .quienes_somos-titulo,
+    .servicios-titulo,
+    .promos_titulo {
+        margin-bottom: 30px;
+    }
+    
+    .servicios-descripcion,
+    .promos_descripcion {
+        font-size: 12px;
+    }
+    
+    .linea-decorativa {
+        width: 50px;
+    }
+    
+    /* QUIÉNES SOMOS */
+    .quienes_somos-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .quienes_somos-valores {
+        grid-template-columns: 1fr;
+    }
+    
+    .parrafo-principal {
+        font-size: 13px;
+        padding: 12px;
+        border-left: 3px solid var(--primary);
+    }
+    
+    .parrafo-secundario {
+        font-size: 12px;
+        padding: 12px;
+        text-align: left;
+    }
+    
+    .valor {
+        padding: 20px 15px;
+        border-radius: 8px;
+    }
+    
+    .valor-icono {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    
+    .valor h3 {
+        font-size: 14px;
+        margin: 10px 0 8px 0;
+    }
+    
+    .valor p {
+        font-size: 11px;
+    }
+    
+    /* SERVICIOS */
+    .servicios-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .servicio-card {
+        padding: 15px 12px;
+        gap: 12px;
+    }
+    
+    .servicio-card-especial {
+        grid-column: 1;
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .servicio-icono {
+        font-size: 40px;
+    }
+    
+    .servicio-titulo {
+        font-size: 14px;
+    }
+    
+    .servicio-texto {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+    
+    .servicio-categoria {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+    
+    .servicio-boton {
+        padding: 10px 15px;
+        font-size: 11px;
+    }
+    
+    /* PROMOS */
+    .promos_grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .promo_card {
+        padding: 15px 12px;
+    }
+    
+    .promo_badge {
+        padding: 6px 10px;
+        font-size: 14px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .promo_contenido {
+        padding: 15px 0;
+        gap: 10px;
+    }
+    
+    .promo_titulo_card {
+        font-size: 14px;
+    }
+    
+    .promo_descripcion_card {
+        font-size: 11px;
+    }
+    
+    .promo_precio {
+        gap: 10px;
+        padding-top: 10px;
+    }
+    
+    .precio_original {
+        font-size: 12px;
+    }
+    
+    .precio_nuevo {
+        font-size: 18px;
+    }
+    
+    .promo_boton {
+        padding: 10px 15px;
+        font-size: 11px;
+    }
+    
+    .promos_nota {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    .promos_nota p {
+        font-size: 12px;
+    }
+    
+    /* FORMULARIO */
+    .formulario_fondo_container {
+        padding: 25px 15px;
+        border-radius: 12px;
+    }
+    
+    .formulario_fondo_container h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .formulario_fondo_container label {
+        font-size: 12px;
+        gap: 6px;
+    }
+    
+    .formulario_fondo_container input,
+    .formulario_fondo_container textarea,
+    .formulario_fondo_container select {
+        padding: 10px 12px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+    
+    .formulario_fondo_botones {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-enviar,
+    .btn-limpiar {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+    
+    /* FOOTER */
+    footer {
+        padding: 15px 10px;
+        background: linear-gradient(180deg, #0055ff, #0055ff8a);
+    }
+    
+    footer h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+    }
+    
+    .contenido_general {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .fondo-logo_footer {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 10px;
+    }
+    
+    .redes_sociales .imagenes {
+        height: 24px;
+        margin: 5px;
+    }
+    
+    .politicas {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .politicas_navegacion {
+        font-size: 10px;
+        padding: 4px;
+        margin: 4px 0;
+    }
+    
+    .copyright {
+        font-size: 10px;
+        margin-top: 10px;
+    }
+    
+    /* ELEMENTOS ESPECIALES */
+    .servicio_section::before,
+    .servicio_section::after,
+    .quienes_somos-section::before,
+    .promos_section::before,
+    .promos_section::after {
+        display: none;
+    }
+    
+    .valor:hover {
+        transform: translateY(-5px);
+    }
+    
+    .servicio-card:hover,
+    .promo_card:hover {
+        transform: translateY(-8px);
     }
 }
