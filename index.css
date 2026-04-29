@@ -1,0 +1,1114 @@
+/* Fuentes */
+@font-face {
+  font-family: 'Caldstone';
+  src: url('../FUENTES/Caldstone-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VCR_OSD_Mono';
+  src: url('../FUENTES/VCR_OSD_MONO_1.001.ttf') format('truetype');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'MarleyAntique';
+  src: url('../FUENTES/MarleyAntique.ttf') format('truetype');
+  font-weight: 500;
+}
+/* =========================
+   VARIABLES (DISEÑO GLOBAL)
+========================= */
+:root {
+    --bg: #0b1220;
+    --card: #111a2e;
+    --primary: #00b4d8;
+    --primary-dark: #00288c;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --white: #ffffff;
+
+    --radius: 14px;
+    --shadow: 0 12px 30px rgba(0,0,0,0.25);
+
+}
+
+/* =========================
+   RESET & BASE
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.logo_imagen{
+    display: block;
+    width: clamp(250px, 35%, 450px);
+    height: clamp(250px, 35%, 450px);
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+.fondo_imagen{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+.header {
+    width:100%;
+    padding: 15px 20px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.93);
+    gap: 20px;
+    position: fixed;
+}
+
+.navegacion{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.navegacion a {
+    padding: 8px 12px;
+    font-family: "VCR_OSD_Mono";
+    font-weight: bold;
+    font-size: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+.navegacion a:hover{
+    background-color: var(--muted);
+    transform: scale(1.05);
+}
+
+/* Botón Header */
+.boton_header {
+    padding: 8px 16px;
+    font-family: "VCR_OSD_Mono";
+    font-weight: bold;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton_header:hover {
+    background-color: var(--primary);
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 180, 216, 0.6);
+}
+/* Contenedor por arriba de la imagen */
+.contenido_arriba-imagen{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 20px;
+    gap: 15px;
+}
+.contenido_arriba-imagen .servicio_tecnico, .eslogan{
+    padding-left:20px;
+    position: relative;
+    top: 0;
+    color:#fff;
+    background-color: #00000049;
+    border-radius: 5px;
+    text-shadow: 1px .8px .8px rgb(0, 0, 0);
+    z-index: 2;
+}
+.servicio_tecnico{
+    font-size: 30px;
+    font-weight: 800;
+}
+.eslogan{
+    font-size:  20px;
+    opacity: 0.9;
+}
+/* Contenido Principal */
+main {
+    width: 100%;
+    min-height: 100vh;
+    background: transparent;
+    user-select: none; 
+}
+
+/* =========================
+   QUIÉNES SOMOS
+========================= */
+.quienes_somos-section {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg) 0%, var(--card) 100%);
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.quienes_somos-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 180, 216, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.quienes_somos-contenido {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.quienes_somos-titulo {
+    text-align: center;
+    font-family: "MarleyAntique";
+    margin-bottom: 50px;
+}
+
+.subtitulo_quienes_somos {
+    font-size: 48px;
+    font-family: "GrimeSlime";
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.linea-decorativa {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    margin: 20px auto 0;
+}
+
+.quienes_somos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.quienes_somos-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.parrafo-principal {
+    font-size: 18px;
+    font-family: "VCR_OSD_Mono";
+    color: var(--primary);
+    line-height: 1.8;
+    margin: 0;
+    padding: 20px;
+    background: rgba(0, 180, 216, 0.1);
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.parrafo-principal strong {
+    color: var(--white);
+    font-weight: bold;
+}
+
+.parrafo-principal:hover {
+    background: rgba(0, 180, 216, 0.15);
+    transform: translateX(10px);
+}
+
+.parrafo-secundario {
+    font-size: 16px;
+    font-family: "VCR_OSD_Mono";
+    color: var(--text);
+    line-height: 1.8;
+    margin: 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    text-align: justify;
+}
+
+.quienes_somos-valores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.valor {
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.1) 0%, rgba(0, 150, 199, 0.05) 100%);
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid var(--primary);
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.valor:hover {
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.2) 0%, rgba(0, 150, 199, 0.1) 100%);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 180, 216, 0.2);
+}
+
+.valor-icono {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.valor h3 {
+    font-family: "GrimeSlime";
+    font-size: 20px;
+    color: var(--primary);
+    margin: 15px 0 10px 0;
+    text-transform: uppercase;
+}
+
+.valor p {
+    font-family: "VCR_OSD_Mono";
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .quienes_somos-section {
+        padding: 40px 15px;
+        min-height: auto;
+    }
+    
+    .subtitulo_quienes_somos {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+    
+    .quienes_somos-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .parrafo-principal,
+    .parrafo-secundario {
+        font-size: 14px;
+    }
+    
+    .quienes_somos-valores {
+        grid-template-columns: 1fr;
+    }
+    
+    .valor-icono {
+        font-size: 36px;
+    }
+    
+    .valor h3 {
+        font-size: 16px;
+    }
+}
+.reparacion_distinta{
+    width:15%;
+    border:2px solid black;
+    border-radius: 0%;
+    padding: 8px;
+    background-color: #0055ffa3;
+}
+
+/* Servicios Seccion */
+.contenido-principal {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg) 0%, var(--card) 100%);
+}
+
+.servicios_section {
+    width: 100%;
+    min-height: 100vh;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.servicios_section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 180, 216, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.servicios_section::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 150, 199, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.servicios-contenedor {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.servicios-titulo {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.subtitulo_servicios {
+    font-size: 48px;
+    font-family: "GrimeSlime";
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 15px 0;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.servicios-descripcion {
+    font-family: "VCR_OSD_Mono";
+    font-size: 16px;
+    color: var(--text);
+    margin: 0;
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.servicio-card {
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.1) 0%, rgba(0, 150, 199, 0.05) 100%);
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.servicio-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.servicio-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 50px rgba(0, 180, 216, 0.3);
+    border-color: var(--primary-dark);
+}
+
+.servicio-card-especial {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.servicio-icono {
+    font-size: 56px;
+    text-align: center;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.servicio-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+}
+
+.servicio-titulo {
+    font-family: "MarleyAntique";
+    font-size: 20px;
+    color: var(--primary);
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 1.3;
+}
+
+.servicio-texto {
+    font-family: "VCR_OSD_Mono";
+    font-size: 13px;
+    color: var(--text);
+    margin: 0;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.servicio-categoria {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-family: "VCR_OSD_Mono";
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: fit-content;
+}
+
+.servicio-categoria.hardware {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff8a7b;
+    border: 1px solid #ff8a7b;
+}
+
+.servicio-categoria.software {
+    background: rgba(78, 205, 196, 0.2);
+    color: #4ecdc4;
+    border: 1px solid #4ecdc4;
+}
+
+.servicio-categoria.premium {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    border: 1px solid #ffc107;
+}
+
+.servicio-boton {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--bg);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: "VCR_OSD_Mono";
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+.servicio-boton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 180, 216, 0.4);
+}
+
+.servicio-boton:active {
+    transform: scale(0.98);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .servicios_section {
+        padding: 40px 15px;
+        min-height: auto;
+    }
+    
+    .subtitulo_servicios {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+    
+    .servicios-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .servicio-card-especial {
+        grid-column: 1;
+        max-width: 100%;
+    }
+    
+    .servicio-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .servicio-icono {
+        font-size: 48px;
+    }
+    
+    .servicio-titulo {
+        font-size: 18px;
+    }
+    
+    .servicio-texto {
+        font-size: 12px;
+    }
+}
+
+/* =========================
+   MAPA
+========================= */
+#ubicacion {
+    width: 100%;
+    min-height: 80vh;
+}
+.ubicacion_mapa{
+    font-size: 24px;
+    font-weight: 800;
+    font-family: "VCR_OSD_Mono";
+    text-transform: uppercase;
+    background-color: #0055FF;
+    color:#fff;
+    padding:10px;
+}
+#mapa{
+    height: 70vh;
+    background-color: var(--primary-dark);
+    text-emphasis: none;
+    text-align: center;
+}
+#mapa iframe {
+    border-radius: var(--radius);
+    padding:10px;
+}
+.Ubicación{
+    text-align: center;
+
+}
+/* =========================
+   PROMOS VIGENTES
+========================= */
+.promos_section {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg) 0%, var(--card) 100%);
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.promos_section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 180, 216, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.promos_section::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 150, 199, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.promos_contenedor {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.promos_titulo {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.promos_subtitulo {
+    font-size: 48px;
+    font-family: "GrimeSlime";
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 15px 0;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.promos_descripcion {
+    font-family: "VCR_OSD_Mono";
+    font-size: 16px;
+    color: var(--text);
+    margin: 0;
+}
+
+.promos_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.promo_card {
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.1) 0%, rgba(0, 150, 199, 0.05) 100%);
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.promo_card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 50px rgba(0, 180, 216, 0.3);
+    border-color: var(--primary-dark);
+}
+
+.promo_badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #ff6b6b, #ff8e72);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-family: "GrimeSlime";
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 3;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.promo_badge-verde {
+    background: linear-gradient(135deg, #4ecdc4, #44a8a3);
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+}
+
+.promo_badge-naranja {
+    background: linear-gradient(135deg, #ffa94d, #fd7e14);
+    box-shadow: 0 4px 15px rgba(255, 164, 77, 0.4);
+}
+
+.promo_badge-rojo {
+    background: linear-gradient(135deg, #ee5a6f, #f06b87);
+    box-shadow: 0 4px 15px rgba(238, 90, 111, 0.4);
+}
+
+.promo_contenido {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.promo_titulo_card {
+    font-family: "GrimeSlime";
+    font-size: 20px;
+    color: var(--primary);
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 1.3;
+}
+
+.promo_descripcion_card {
+    font-family: "VCR_OSD_Mono";
+    font-size: 13px;
+    color: var(--text);
+    margin: 0;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.promo_precio {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 180, 216, 0.3);
+}
+
+.precio_original {
+    font-family: "VCR_OSD_Mono";
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: line-through;
+}
+
+.precio_nuevo {
+    font-family: "GrimeSlime";
+    font-size: 24px;
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+.promo_boton {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--bg);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: "VCR_OSD_Mono";
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.promo_boton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 180, 216, 0.4);
+}
+
+.promo_boton:active {
+    transform: scale(0.98);
+}
+
+.promos_nota {
+    background: rgba(0, 180, 216, 0.15);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    font-family: "VCR_OSD_Mono";
+    color: var(--text);
+    margin-top: 40px;
+}
+
+.promos_nota p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.promos_nota strong {
+    color: var(--primary);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .promos_section {
+        padding: 40px 15px;
+        min-height: auto;
+    }
+    
+    .promos_subtitulo {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+    
+    .promos_grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .promo_card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .promo_titulo_card {
+        font-size: 18px;
+    }
+    
+    .precio_nuevo {
+        font-size: 20px;
+    }
+}
+
+/*Formulario*/
+.formulario_fondo_section {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('../MEDIA/fdoflario.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.formulario_fondo_section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.formulario_fondo_container {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(17, 26, 46, 0.95);
+    border-radius: var(--radius);
+    padding: 50px 40px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--primary);
+}
+
+.formulario_fondo_container h2 {
+    font-family: "MarleyAntique";
+    font-size: 32px;
+    color: var(--primary);
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.formulario_fondo_container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formulario_fondo_container label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: "VCR_OSD_Mono";
+    color: var(--text);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.formulario_fondo_container input,
+.formulario_fondo_container textarea,
+.formulario_fondo_container select {
+    padding: 12px 15px;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    font-family: "VCR_OSD_Mono";
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.formulario_fondo_container input:focus,
+.formulario_fondo_container textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: rgba(0, 114, 137, 0.2);
+    box-shadow: 0 0 10px rgba(0, 180, 216, 0.3);
+}
+.formulario_fondo_container select:focus{
+    outline: none;
+    border-color: var(--primary);
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 180, 216, 0.3);
+}
+.formulario_fondo_container input::placeholder,
+.formulario_fondo_container textarea::placeholder {
+    color: var(--muted);
+}
+
+.formulario_fondo_container textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.formulario_fondo_botones {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.formulario_fondo_botones button,
+.formulario_fondo_botones input[type="submit"],
+.formulario_fondo_botones input[type="reset"] {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-family: "VCR_OSD_Mono";
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-enviar {
+    background-color: var(--primary);
+    color: var(--bg);
+}
+
+.btn-enviar:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 180, 216, 0.4);
+}
+
+.btn-limpiar {
+    background-color: transparent;
+    color: red;
+    border: 2px solid var(--primary);
+}
+
+.btn-limpiar:hover {
+    background-color:red;
+    color: var(--bg);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    width: 100%;
+    min-height: 35vh;
+    background: linear-gradient(180deg,#0055ff, #0055ff97) ;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 25px 15px;
+}
+
+footer h3 {
+    font-family:"MarleyAntique";
+    letter-spacing: 1.2px;
+    font-size: 24px;
+    font-weight: 600;
+    text-shadow: 2px 2px 2px #666;
+}
+
+/* Layout footer */
+.contenido_general {
+    display: grid;
+    grid-template-columns: 300px repeat(2, 1fr) 350px;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    text-align: center;
+    font-family: "VCR_OSD_Mono";
+}
+.fondo-logo_footer{
+    width:280px;
+    height: 250px;
+}
+/* Redes */
+.redes_sociales .imagenes {
+    height: 32px;
+    margin: 8px;
+    transition: transform .2s ease;
+}
+
+.redes_sociales .imagenes:hover {
+    transform: scale(1.1);
+}
+
+/* Bloque inferior */
+div:nth-child(5) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    margin-bottom: 6px;
+}
+/* Políticas */
+.politicas {
+    display: flex;
+    justify-content: center;
+}
+
+.politicas_navegacion {
+    color: #fff;
+    font-family: "VCR_OSD_Mono";
+    padding:8px;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 9px 0px;
+}
+.politicas_navegacion:hover{
+    text-decoration:solid;
+    scale: 1.1;
+}
+/* Copyright */
+.copyright {
+    font-size: 12px;
+    opacity: .8;
+    text-align: center;
+    font-family: "MarleyAntique";
+    letter-spacing: 0.5px;
+}
+
+
+/* Medias Querys: */
+@media screen and (min-width: 768px) {
+   fondo_imagen{
+    width: 768px;
+    height: 500px;
+   }
+}
+
+@media screen and (max-width: 768px) {
+    .imagenes_formulario {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .formulario_imagen {
+        width: 100%;
+    }
+    
+    .formulario_con_imagenes {
+        padding: 20px;
+    }
+}
