@@ -1,5 +1,10 @@
 {
+  "buildCommand": "echo 'No build needed'",
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
     {
       "source": "/BACKEND/Reparacion.js",
       "destination": "/api/reparacion"

@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
   botonesPromos.forEach(boton => agregarEventoBoton(boton, true));
 
   // Validar formulario antes de enviar
-  const formulario = document.querySelector('form[action="../BACKEND/Reparacion.js"]');
+  const formulario = document.getElementById('formulario_contacto');
   if (formulario) {
     formulario.addEventListener('submit', function(e) {
       const servicioSolicitado = document.getElementById('servicio_solicitado');
