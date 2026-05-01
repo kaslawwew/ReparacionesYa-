@@ -12,10 +12,11 @@ module.exports = async (req, res) => {
   const SPREADSHEET_ID = '1vYddDhWzv8WsPAeWM4zG7LCA7cjl0SDFUlNn_N-roo0';
   const CLIENT_EMAIL = "reparacionesya@reparacionesya-495022.iam.gserviceaccount.com";
   
-  // La clave privada debe manejar correctamente los saltos de línea \n
-// Dentro de api/reparacion.js
-const PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n..." // (tu clave larga)
-  .replace(/\\n/g, '\n'); // Esto asegura que los saltos de línea sean válidos
+  // Clave privada con tratamiento especial para Node 24 (soluciona error DECODER)
+  const rawKey = "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQCkWuNQvWP0pjni\nlOcAmBNpGsQqrDIspS1bYk+U7XKkrzFdlhteTvJzMJpJSrGyCfeLUEkkWw4GTMkp\n9mLOGANS5I/6M8c5oglA8r2RLC11nNP7a+XhujCkvTxog28HkicQVBaayxRx8f5W\nh/hGBldGu/BVCQB828Qq6jCi1cylCMtyJ8QYGfkTaKCiB/wXC8AS/yMxYKbXsQe6\nqhpcuWvkRC7acxwxDYPJskn8L0W3LwxtYZv/QgpXfmbnKvKIXH3P0G9huh/jtM1r\n/YbjvTNhd2pr3SA9G7ecxiW+AvL+xlDuUdiB697IlnSkUykiZDlMGTs+cn2rdpnP\nfDTBVNZ7AgMBAAECgf9HQyFM4NF2QpzWobmHiGjiKbjkx8T5lqUT+oyHBm2u+kdt\nTKiRO6nkSC6dmMVzbN7oiOct3E04bhLLHwm4UrEeP/wtgEXht2BLyPRo/b64QEep\nvB7wwMpWo7aNmm+J2NUXP16Nv4Ad589ftZTwx88P3G1YcY7ElIV6FhEAibMx2uxM\nGHRd8qGT7u1N8VCeo/h7Hd+JXlbEE5BJKV13VDo9oL8Dg0wXHqK+D2GaFb2maq1H\nBZ19V6zKzjneBqJLRgxnQBDtYdJOBj3qyW7+ms1ohAH+VQXysYSXGNuZcomPUARl\nELt7GtzLit7VlZrFA9hD81+tgvqSvSD8PHnZQvECgYEA1pm+gn5VJ2HpL9gXq0Nu\n9P8ZAvcTb+ahYaib3QVa4gyUdSTvrdiEAbfJZws3oeD2+5lks9FdfjYTUSKsNFMn\nGuIq7HJEyBsPvp04FJbwRCqkR6C8x+f2DOP7wnKWIMfLCUdQFw8buNtOyQMYO9ie\nh2D+WPNETprnyH2h1YqeSokCgYEAxA+4PjpISGizUkIq2eh41lRGLI8T2BKyou3J\n2wdaoeXbk1QNF58SNkeoBlDBzfYk3H0K/hACJlepUC4BC+JlB2vN8TqIX2y/eQhc\n2paDmdnWyfrGXEyTS4JTu6JcXJOUeMJ+AMPoucLVIGHpMak1SXzfwI5T4HRhYPJz\n1KO3B+MCgYAq59xGHNoLoLDNpwe8byQNCb/HbvzM37CeZOacvwhXr6oy7aqZ+HMU\nINm8p2p9DAx1a0rOBOsLY+Ziz2rcn09vOY7ZbVNBKt/v/WEMBM2O43Oq+oEj+sWf\n+CkKzHwlm6yFc2OY6KVjRT2wRNUgigPQD11rDWA30xLKbAviNO/G+QKBgCyih4dj\nLWGOtIRdm/PQAPKKbQ9n41SlrRV6nSHIItIIylxYHkLqa/L/jTki2XxSNUIdFYuR\niWvBOUKPtp1GBUoTOOdaNAHFeDHNvZXl/j/gYA3Lka0hocbm/LkS1YQd9QcpABac\ngzcHLA4bPEOaCg+Y5jeoL2BCHok7qTMXsmuRAoGAQPdmrCG5cF9yiTwXq6t01PFe\xhQ/JzHCbIxqvkci8orwnzLzn4fQzLDvpq9HvKFFXKrqY20P41gfIHoQj60GHWg6\nTlfZ5XzJmr9X1t5L5IrVgg7+OCYGWg8E0D1WUy+A9MgsJT+kgMfX4GMTz4Qo6Yil\nF3SR8zvZZi8njNh3s30=\n-----END PRIVATE KEY-----\n";
+
+  // Reemplazo de caracteres para asegurar que Node lea bien la clave
+  const PRIVATE_KEY = rawKey.replace(/\\n/g, '\n');
 
   const serviceAccountAuth = new JWT({
     email: CLIENT_EMAIL,
@@ -26,7 +27,6 @@ const PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n..." // (tu clave larga)
   const doc = new GoogleSpreadsheet(SPREADSHEET_ID, serviceAccountAuth);
 
   try {
-    // Vercel parsea automáticamente el body si es JSON o URL Encoded
     const { 
       nombre_contacto, 
       email_contacto, 
@@ -55,7 +55,7 @@ const PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n..." // (tu clave larga)
     // 2. Añadir la fila
     await sheet.addRow(datosFormulario);
 
-    // 3. Respuesta HTML de éxito (El diseño que ya tenías)
+    // 3. Respuesta HTML de éxito
     res.setHeader('Content-Type', 'text/html');
     return res.status(200).send(`
       <!DOCTYPE html>
@@ -73,21 +73,20 @@ const PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n..." // (tu clave larga)
       </head>
       <body>
         <div class="card">
-          <h1>¡Formulario Recibido!</h1>
-          <p>Gracias <strong>${datosFormulario.Nombre}</strong>. Ya guardamos tu solicitud en nuestra base de datos.</p>
-          <p>Nos comunicaremos al teléfono: ${datosFormulario.Telefono}</p>
+          <h1>¡Recibido!</h1>
+          <p>Hola <strong>${datosFormulario.Nombre}</strong>. Ya guardamos tu solicitud en nuestra planilla.</p>
           <a href="/" class="btn">Volver al Sitio</a>
         </div>
       </body>
       </html>
     `);
 
-} catch (error) {
-    console.error('DETALLE DEL ERROR:', error); // Esto lo verás en los logs de Vercel
+  } catch (error) {
+    console.error('ERROR DETALLADO:', error);
     return res.status(500).json({ 
-      error: 'Error interno al guardar', 
+      error: 'Error al guardar en Google Sheets', 
       message: error.message,
-      stack: error.stack // Esto nos dará más pistas del "undefined"
+      code: error.code
     });
   }
 };
