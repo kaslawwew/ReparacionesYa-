@@ -1,13 +1,8 @@
 {
-  "functions": {
-    "api/**/*.js": {
-      "maxDuration": 30
-    }
-  },
   "rewrites": [
     {
       "source": "/BACKEND/Reparacion.js",
-      "destination": "/api/reparacion.js"
+      "destination": "/api/reparacion"
     }
   ]
 }
