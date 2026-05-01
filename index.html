@@ -166,17 +166,17 @@
                 <div class="promo_card">
                     <div class="promo_badge">-20%</div>
                     <div class="promo_contenido">
-                        <h3 class="promo_titulo_card">Limpieza de PC</h3>
-                        <p class="promo_descripcion_card">Eliminamos polvo y mejoramos el rendimiento de tu equipo. Mantén tu PC en óptimas condiciones.</p>
+                        <h3 class="promo_titulo_card">Limpieza de PC y Componentes</h3>
+                        <p class="promo_descripcion_card">Eliminamos polvo y mejoramos el rendimiento de tu equipo. Mantén tu PC en óptimas condiciones, con los mejores productos.</p>
                         <div class="promo_precio">
-                            <span class="precio_original">$50.000</span>
-                            <span class="precio_nuevo">$40.000</span>
+                            <span class="precio_original">$35000</span>
+                            <span class="precio_nuevo">$30.000</span>
                         </div>
                     </div>
                     <button class="promo_boton">Solicitar Ahora</button>
                 </div>
 
-                <div class="promo_card">
+                <!-- <div class="promo_card">
                     <div class="promo_badge promo_badge-verde">-15%</div>
                     <div class="promo_contenido">
                         <h3 class="promo_titulo_card">Combo Reparación + Antivirus</h3>
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                     <button class="promo_boton">Solicitar Ahora</button>
-                </div>
+                </div> -->
 
                 <div class="promo_card">
                     <div class="promo_badge promo_badge-naranja">-25%</div>
@@ -208,8 +208,8 @@
                         <h3 class="promo_titulo_card">Instalación Windows + Office</h3>
                         <p class="promo_descripcion_card">Sistema operativo con todos los drivers instalados. Microsoft Office con licencia incluida.</p>
                         <div class="promo_precio">
-                            <span class="precio_original">$45.000</span>
-                            <span class="precio_nuevo">$31.500</span>
+                            <span class="precio_original">$30.000</span>
+                            <span class="precio_nuevo">$25.000</span>
                         </div>
                     </div>
                     <button class="promo_boton">Solicitar Ahora</button>
@@ -224,7 +224,7 @@
     <section id="formulario_fondo" class="formulario_fondo_section">
         <div class="formulario_fondo_container">
             <h2>Contacto Rapido</h2>
-            <form action="../BACKEND/Reparacion.js" method="post">
+            <form action="/BACKEND/Reparacion.js" method="post">
                 <label for="nombre_contacto">
                     Nombre Completo:
                     <input type="text" id="nombre_contacto" name="nombre_contacto" required placeholder="Ingresa tu nombre">
@@ -236,6 +236,10 @@
                 <label for="telefono_contacto">
                     Teléfono:
                     <input type="tel" id="telefono_contacto" name="telefono_contacto" required placeholder="+54 (123) 456-7890">
+                </label>
+                <label for="servicio_solicitado">
+                    Servicio de Interés:
+                    <input type="text" id="servicio_solicitado" name="servicio_solicitado" placeholder="Se auto-completa al seleccionar un servicio">
                 </label>
                 <label for="tipo_dispositivo">
                     ¿Qué dispositivo necesita reparación?:
@@ -251,8 +255,13 @@
                     <textarea id="tipo_falla" name="tipo_falla" required placeholder="Cuéntanos qué problema tiene tu equipo..."></textarea>
                 </label>
                 <label for="fecha_contacto">
-                    ¿Cuándo prefieres que nos contactemos?:
-                    <input type="date" id="fecha_contacto" name="fecha_contacto" required>
+                    ¿La reparacion es con busqueda a domicilio?:
+                    <select id="fecha_contacto" name="fecha_contacto" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="si">Sí, necesito busqueda a domicilio</option>
+                        <option value="no">No, llevaré el equipo al local</option>
+                    </select>
+                    <p class="parrafo">Deja la ubicacion de tu domicilio en el campo de descripción del problema, para que podamos coordinar la busqueda a domicilio.</p>
                 </label>
                 <div class="formulario_fondo_botones">
                     <input class="btn-enviar" type="submit" value="Enviar Consulta">
@@ -268,23 +277,23 @@
             </div>
             <div class="redes_sociales">
                 <h3>Nuestras Redes Sociales:</h3>
-                <a href=""><img src="../MEDIA/linkedin.png" alt="Red Social" class="imagenes"></a>
                 <a href="https://www.instagram.com/abeliito__/"><img src="../MEDIA/instagram.png" alt="Red Social Instagram" class="imagenes"></a>
                 <a href=""><img src="../MEDIA/facebook.png" alt="Red Social Facebook" class="imagenes"></a> 
                 
             </div>
             <div class="metodos-pago">
                 <h3>Metodos de Pagos:</h3>
-                <p>Aceptamos Efectivo y Billeteras Virtuales.</p>
+                <p>Aceptamos Efectivo y Billeteras Virtuales 💳💴.</p>
             </div>
             <div class="footer-contenido_direccion">
                 <h3>Donde Nos Ubicamos: </h3>
                 <p><b>Direccion: </b>Padre Serrano 3170 Entre AV San Martin & AV Blas Parera</p>
-                <p>Posadas-Misiones</p>
+                <p>Posadas-Misiones📍.</p>
             </div>
             <div class="footer-contenido_atencionhora">
-                <h3>Horario de Atencion: </h3>
-                <p class="atencion">8Hs a 12Hs & 15Hs a 19Hs</p>
+                    <h3>Horario de Atencion: </h3>
+                    <p class="atencion">Lunes a Viernes: 11Hs a 13Hs & 14Hs a 17Hs (Horarios Rotativos)</p>
+                    <p class="atencion">Sabados y Domingos: 8Hs a 12Hs & 15Hs a 19Hs</p>
             </div>
         </div>
         <hr>
@@ -296,5 +305,7 @@
         <p class="copyright">© 2025-2026 ReparacionesYa! -Todos los derechos reservados.</p>
     </footer>
     
+    <!-- Script para capturar solicitud de servicios -->
+    <script src="js/servicios.js"></script>
 </body>
 </html>

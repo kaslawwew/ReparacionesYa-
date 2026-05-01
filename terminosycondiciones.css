@@ -175,8 +175,12 @@ header {
     border-radius: 8px;
     text-align: justify;
 }
-
-
+.numeros{
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--primary);
+}
 /* =========================
    FOOTER
 ========================= */
@@ -221,12 +225,14 @@ footer h3 {
 }
 /* Políticas */
 .politicas {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.contenido_general:nth-child(5) {
-    grid-column: 4;
+.contenido_general> div:nth-child(5) {
+    grid-column-start: -4;
+    grid-column-end: -2;
     place-self: center;
 }
 .politicas_navegacion {

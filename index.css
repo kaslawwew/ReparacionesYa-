@@ -1089,7 +1089,11 @@ footer h3 {
     font-family: "VCR_OSD_Mono";
     letter-spacing: 0.5px;
 }
-
+.contenido_general> div:nth-child(5) {
+    grid-column-start: -4;
+    grid-column-end: -2;
+    place-self: center;
+}
 /* =========================
    MEDIA QUERIES - RESPONSIVE
 ========================= */
