@@ -2,10 +2,26 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const ExcelManager = require('./BACKEND/ExcelManager');
+const { GoogleSpreadsheet } = require('google-spreadsheet');
+const { JWT } = require('google-auth-library');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// --- CONFIGURACIÓN GOOGLE SHEETS ---
+const SPREADSHEET_ID = '1vYddDhWzv8WsPAeWM4zG7LCA7cjl0SDFUlNn_N-roo0';
+const CREDENTIALS = {
+  client_email: "reparacionesya@reparacionesya-495022.iam.gserviceaccount.com",
+  private_key: "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQCkWuNQvWP0pjni\nlOcAmBNpGsQqrDIspS1bYk+U7XKkrzFdlhteTvJzMJpJSrGyCfeLUEkkWw4GTMkp\n9mLOGANS5I/6M8c5oglA8r2RLC11nNP7a+XhujCkvTxog28HkicQVBaayxRx8f5W\nh/hGBldGu/BVCQB828Qq6jCi1cylCMtyJ8QYGfkTaKCiB/wXC8AS/yMxYKbXsQe6\nqhpcuWvkRC7acxwxDYPJskn8L0W3LwxtYZv/QgpXfmbnKvKIXH3P0G9huh/jtM1r\n/YbjvTNhd2pr3SA9G7ecxiW+AvL+xlDuUdiB697IlnSkUykiZDlMGTs+cn2rdpnP\nfDTBVNZ7AgMBAAECgf9HQyFM4NF2QpzWobmHiGjiKbjkx8T5lqUT+oyHBm2u+kdt\nTKiRO6nkSC6dmMVzbN7oiOct3E04bhLLHwm4UrEeP/wtgEXht2BLyPRo/b64QEep\nvB7wwMpWo7aNmm+J2NUXP16Nv4Ad589ftZTwx88P3G1YcY7ElIV6FhEAibMx2uxM\nGHRd8qGT7u1N8VCeo/h7Hd+JXlbEE5BJKV13VDo9oL8Dg0wXHqK+D2GaFb2maq1H\nBZ19V6zKzjneBqJLRgxnQBDtYdJOBj3qyW7+ms1ohAH+VQXysYSXGNuZcomPUARl\nELt7GtzLit7VlZrFA9hD81+tgvqSvSD8PHnZQvECgYEA1pm+gn5VJ2HpL9gXq0Nu\n9P8ZAvcTb+ahYaib3QVa4gyUdSTvrdiEAbfJZws3oeD2+5lks9FdfjYTUSKsNFMn\nGuIq7HJEyBsPvp04FJbwRCqkR6C8x+f2DOP7wnKWIMfLCUdQFw8buNtOyQMYO9ie\nh2D+WPNETprnyH2h1YqeSokCgYEAxA+4PjpISGizUkIq2eh41lRGLI8T2BKyou3J\n2wdaoeXbk1QNF58SNkeoBlDBzfYk3H0K/hACJlepUC4BC+JlB2vN8TqIX2y/eQhc\n2paDmdnWyfrGXEyTS4JTu6JcXJOUeMJ+AMPoucLVIGHpMak1SXzfwI5T4HRhYPJz\n1KO3B+MCgYAq59xGHNoLoLDNpwe8byQNCb/HbvzM37CeZOacvwhXr6oy7aqZ+HMU\nINm8p2p9DAx1a0rOBOsLY+Ziz2rcn09vOY7ZbVNBKt/v/WEMBM2O43Oq+oEj+sWf\n+CkKzHwlm6yFc2OY6KVjRT2wRNUgigPQD11rDWA30xLKbAviNO/G+QKBgCyih4dj\nLWGOtIRdm/PQAPKKbQ9n41SlrRV6nSHIItIIylxYHkLqa/L/jTki2XxSNUIdFYuR\niWvBOUKPtp1GBUoTOOdaNAHFeDHNvZXl/j/gYA3Lka0hocbm/LkS1YQd9QcpABac\ngzcHLA4bPEOaCg+Y5jeoL2BCHok7qTMXsmuRAoGAQPdmrCG5cF9yiTwXq6t01PFe\nxhQ/JzHCbIxqvkci8orwnzLzn4fQzLDvpq9HvKFFXKrqY20P41gfIHoQj60GHWg6\nTlfZ5XzJmr9X1t5L5IrVgg7+OCYGWg8E0D1WUy+A9MgsJT+kgMfX4GMTz4Qo6Yil\nF3SR8zvZZi8njNh3s30=\n-----END PRIVATE KEY-----\n"
+};
+
+const serviceAccountAuth = new JWT({
+  email: CREDENTIALS.client_email,
+  key: CREDENTIALS.private_key,
+  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+});
+
+const doc = new GoogleSpreadsheet(SPREADSHEET_ID, serviceAccountAuth);
 
 // Middleware
 app.use(cors());
@@ -15,27 +31,26 @@ app.use(bodyParser.json());
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname)));
 
-// Instanciar el gestor de Excel
-const excelManager = new ExcelManager('./DATA/formularios.xlsx');
-
 // Ruta para recibir datos del formulario
 app.post('/BACKEND/Reparacion.js', async (req, res) => {
   try {
     const datosFormulario = {
-      nombre: req.body.nombre_contacto,
-      email: req.body.email_contacto,
-      telefono: req.body.telefono_contacto,
-      dispositivo: req.body.tipo_dispositivo,
-      problema: req.body.tipo_falla,
-      servicio: req.body.servicio_solicitado || 'No especificado',
-      fechaContacto: req.body.fecha_contacto,
-      fechaRegistro: new Date().toLocaleString('es-AR')
+      Nombre: req.body.nombre_contacto,
+      Email: req.body.email_contacto,
+      Telefono: req.body.telefono_contacto,
+      Dispositivo: req.body.tipo_dispositivo === 'pc' ? 'PC de Escritorio' : req.body.tipo_dispositivo === 'notebook' ? 'Notebook/Laptop' : 'Ambos',
+      Problema: req.body.tipo_falla,
+      Servicio: req.body.servicio_solicitado || 'No especificado',
+      Fecha_Contacto: req.body.fecha_contacto,
+      Fecha_Registro: new Date().toLocaleString('es-AR')
     };
 
-    // Guardar en Excel
-    await excelManager.agregarDato(datosFormulario);
+    // Guardar en Google Sheets
+    await doc.loadInfo();
+    const sheet = doc.sheetsByIndex[0]; 
+    await sheet.addRow(datosFormulario);
 
-    // Redirigir o responder
+    // Redirigir o responder (Tu HTML original)
     res.send(`
       <!DOCTYPE html>
       <html lang="es">
@@ -278,14 +293,14 @@ app.post('/BACKEND/Reparacion.js', async (req, res) => {
           </div>
 
           <div class="content">
-            <p>Hola <strong>${datosFormulario.nombre}</strong>,</p>
+            <p>Hola <strong>${datosFormulario.Nombre}</strong>,</p>
             <p>Gracias por confiar en <strong>ReparacionesYa!</strong> Hemos recibido tu solicitud de reparación de manera exitosa.</p>
             
             <div class="details">
-              <p><strong>Teléfono registrado:</strong> ${datosFormulario.telefono}</p>
-              <p><strong>Email:</strong> ${datosFormulario.email}</p>
-              <p><strong>Dispositivo:</strong> ${datosFormulario.dispositivo === 'pc' ? 'PC de Escritorio' : datosFormulario.dispositivo === 'notebook' ? 'Notebook/Laptop' : 'Ambos'}</p>
-              <p><strong>Servicio solicitado:</strong> ${datosFormulario.servicio}</p>
+              <p><strong>Teléfono registrado:</strong> ${datosFormulario.Telefono}</p>
+              <p><strong>Email:</strong> ${datosFormulario.Email}</p>
+              <p><strong>Dispositivo:</strong> ${datosFormulario.Dispositivo}</p>
+              <p><strong>Servicio solicitado:</strong> ${datosFormulario.Servicio}</p>
             </div>
 
             <p>Nuestro equipo de técnicos especializados revisará tu solicitud y <strong>nos contactaremos contigo pronto</strong> para confirmar la cita y resolver tu problema.</p>
@@ -322,7 +337,7 @@ app.post('/BACKEND/Reparacion.js', async (req, res) => {
         <body>
           <div class="error">
             <h2>✗ Error</h2>
-            <p>Hubo un error al guardar el formulario.</p>
+            <p>Hubo un error al guardar el formulario en Google Sheets.</p>
             <p>${error.message}</p>
             <br>
             <a href="/">Volver al inicio</a>
@@ -333,42 +348,11 @@ app.post('/BACKEND/Reparacion.js', async (req, res) => {
   }
 });
 
-// Ruta para obtener todos los datos (opcional, para visualizar)
-app.get('/api/formularios', async (req, res) => {
-  try {
-    const datos = await excelManager.obtenerDatos();
-    res.json({
-      success: true,
-      cantidad: datos.length,
-      datos: datos
-    });
-  } catch (error) {
-    console.error('Error al obtener datos:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error al obtener datos: ' + error.message
-    });
-  }
-});
-
-// Ruta para descargar el Excel
-app.get('/api/descargar-excel', async (req, res) => {
-  try {
-    const filePath = './DATA/formularios.xlsx';
-    res.download(filePath, 'formularios_reparacion.xlsx');
-  } catch (error) {
-    console.error('Error al descargar:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error al descargar: ' + error.message
-    });
-  }
-});
-
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`\n╔════════════════════════════════════════╗`);
-  console.log(`║  Servidor activo en: http://localhost:${PORT}`);
-  console.log(`║  Excel guardado en: ./DATA/formularios.xlsx`);
+  console.log(`║  Servidor ReparacionesYa! activo       ║`);
+  console.log(`║  Google Sheets ID: ...-roo0            ║`);
+  console.log(`║  URL: http://localhost:${PORT}           ║`);
   console.log(`╚════════════════════════════════════════╝\n`);
 });
