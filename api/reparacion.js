@@ -36,25 +36,69 @@ module.exports = async (req, res) => {
     });
 
     return res.status(200).send(`
-      <!DOCTYPE html>
+     <!DOCTYPE html>
       <html lang="es">
       <head>
-        <meta charset="UTF-8">
-        <title>Éxito - ReparacionesYa!</title>
-        <style>
-          body { font-family: sans-serif; background: #2c3e50; display: flex; justify-content: center; align-items: center; height: 100vh; color: white; margin: 0; }
-          .card { background: white; color: #333; padding: 40px; border-radius: 10px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        </style>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Solicitud Recibida - ReparacionesYa!</title>
+          <style>
+              body, html {
+                  height: 100%;
+                  margin: 0;
+                  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              }
+              .bg-image {
+                  /* Usamos la imagen que proporcionaste */
+                  background-image: url('https://reparacionesya-rdhxogk7d-kaslawwews-projects.vercel.app/reparacion-bg.png'); 
+                  background-size: cover;
+                  background-position: center;
+                  height: 100%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  position: relative;
+              }
+              /* Capa oscura para que resalte el texto */
+              .overlay {
+                  position: absolute;
+                  top: 0; left: 0; width: 100%; height: 100%;
+                  background: rgba(0, 0, 0, 0.6); 
+              }
+              .content {
+                  position: relative;
+                  z-index: 1;
+                  text-align: center;
+                  color: white;
+                  padding: 20px;
+              }
+              h1 { font-size: 2.5rem; margin-bottom: 10px; color: #4ade80; }
+              p { font-size: 1.2rem; margin-bottom: 30px; }
+              .btn {
+                  text-decoration: none;
+                  color: white;
+                  background-color: #22c55e;
+                  padding: 12px 24px;
+                  border-radius: 8px;
+                  font-weight: bold;
+                  transition: 0.3s;
+              }
+              .btn:hover { background-color: #16a34a; }
+          </style>
       </head>
       <body>
-        <div class="card">
-          <h2 style="color: #27ae60;">¡Formulario Recibido Exitosamente!</h2>
-          <p>Los datos han sido guardados en el sistema.</p>
-          <a href="/" style="background: #27ae60; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">Volver al Inicio</a>
-        </div>
+          <div class="bg-image">
+              <div class="overlay"></div>
+              <div class="content">
+                  <h1>¡Pronto nos contactaremos contigo!</h1>
+                  <p>Desde ya, muchas gracias por solicitar con nosotros.</p>
+                  <a href="/" class="btn">Volver al Inicio</a>
+              </div>
+          </div>
       </body>
       </html>
     `);
+
 
   } catch (err) {
     console.error(err);
