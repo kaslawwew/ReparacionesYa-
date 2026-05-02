@@ -8,12 +8,12 @@ module.exports = async (req, res) => {
     return res.status(405).end(`Método ${req.method} no permitido`);
   }
 
-  // --- CONFIGURACIÓN DE GOOGLE ---
-  const SPREADSHEET_ID = '1vYddDhWzv8WsPAeWM4zG7LCA7cjl0SDFUlNn_N-roo0';
-  const CLIENT_EMAIL = "reparacionesya@reparacionesya-495022.iam.gserviceaccount.com";
-  
-  // Clave directa con limpieza de caracteres invisible (\r o espacios extra)
-  const privateKeyRaw = `-----BEGIN PRIVATE KEY-----
+// --- CONFIGURACIÓN DE GOOGLE ---
+const SPREADSHEET_ID = '1vYddDhWzv8WsPAeWM4zG7LCA7cjl0SDFUlNn_N-roo0';
+const CLIENT_EMAIL = "reparacionesya@reparacionesya-495022.iam.gserviceaccount.com";
+
+// 1. Pegamos la clave en una sola línea quitando los saltos manuales
+const keyFromSecret = `-----BEGIN PRIVATE KEY-----
 MIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQCkWuNQvWP0pjni
 lOcAmBNpGsQqrDIspS1bYk+U7XKkrzFdlhteTvJzMJpJSrGyCfeLUEkkWw4GTMkp
 9mLOGANS5I/6M8c5oglA8r2RLC11nNP7a+XhujCkvTxog28HkicQVBaayxRx8f5W
@@ -42,8 +42,12 @@ TlfZ5XzJmr9X1t5L5IrVgg7+OCYGWg8E0D1WUy+A9MgsJT+kgMfX4GMTz4Qo6Yil
 F3SR8zvZZi8njNh3s30=
 -----END PRIVATE KEY-----`;
 
-  const PRIVATE_KEY = privateKeyRaw.replace(/(\r\n|\n|\r)/gm, "\n");
-
+// 2. LIMPIEZA EXTREMA: Quitamos espacios raros y normalizamos saltos de línea
+const PRIVATE_KEY = keyFromSecret
+  .split('\n')
+  .map(line => line.trim())
+  .filter(line => line.length > 0)
+  .join('\n')
   const serviceAccountAuth = new JWT({
     email: CLIENT_EMAIL,
     key: PRIVATE_KEY,
