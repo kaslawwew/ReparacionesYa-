@@ -8,18 +8,23 @@ module.exports = async (req, res) => {
     return res.status(405).end(`Método ${req.method} no permitido`);
   }
 
-// ... al principio del archivo
-const SPREADSHEET_ID = '1vYddDhWzv8WsPAeWM4zG7LCA7cjl0SDFUlNn_N-roo0';
 const CLIENT_EMAIL = "reparacionesya@reparacionesya-495022.iam.gserviceaccount.com";
+const SPREADSHEET_ID = '1vYddDhWzv8WsPAeWM4zG7LCA7cjl0SDFUlNn_N-roo0';
 
-// Cargamos la clave desde una variable de entorno de Vercel
-const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY ? 
-  process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n') : 
-  undefined;
+// Intentamos leer la variable
+const privateKey = process.env.GOOGLE_PRIVATE_KEY;
+
+// Si no existe, lanzamos un error que nos diga qué está pasando
+if (!privateKey) {
+  return res.status(500).json({ 
+    error: "Error de configuración", 
+    message: "La variable GOOGLE_PRIVATE_KEY no está definida en Vercel. Revisa Settings > Environment Variables." 
+  });
+}
 
 const serviceAccountAuth = new JWT({
   email: CLIENT_EMAIL,
-  key: PRIVATE_KEY,
+  key: privateKey.replace(/\\n/g, '\n'),
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 // ... el resto del código igual
